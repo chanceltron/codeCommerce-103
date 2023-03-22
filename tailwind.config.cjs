@@ -7,6 +7,21 @@ module.exports = {
         fira: ['Fira Sans', 'sans-serif'],
         code: ['Fira Code', 'monospace'],
       },
+      colors: {
+        'moon-black': '#111111',
+        'moon-gray': '#303030',
+        'moon-ice': '#75F9F4',
+        'moon-red': {
+          100: '#BE516A',
+          200: '#A53649',
+        },
+        'moon-blue': {
+          100: '#84CEE7',
+          200: '#48A5CE',
+          300: '#3F849D',
+          400: '#24627C',
+        },
+      },
     },
   },
   plugins: [],
