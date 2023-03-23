@@ -1,7 +1,9 @@
+import { Navbar } from './components/Navbar';
+
 export function App() {
   return (
-    <div className='App'>
-      <h1 className='text-blue-500 underline'>Code Commerce - React 103</h1>
+    <div className='App bg-moon-gray text-[#eaeaea]'>
+      <Navbar />
     </div>
   );
 }

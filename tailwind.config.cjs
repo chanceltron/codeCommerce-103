@@ -9,7 +9,14 @@ module.exports = {
       },
       colors: {
         'moon-black': '#111111',
-        'moon-gray': '#303030',
+        'moon-gray': {
+          100: '#eaeaea',
+          200: '#bfbfbf',
+          300: '#959595',
+          400: '#6a6a6a',
+          500: '#404040',
+          600: '#303030',
+        },
         'moon-ice': '#75F9F4',
         'moon-red': {
           100: '#BE516A',
