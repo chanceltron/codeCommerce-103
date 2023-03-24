@@ -17,11 +17,6 @@ export function Navbar({ navbarHeight, setNavbarHeight }: any) {
     setNavbarHeight(navbarRef.current.offsetHeight);
   }, [width]);
 
-  // useEffect(() => {
-  //   console.log(navbarRef.current.offsetHeight);
-  //   setNavbarHeight(navbarRef.current.offsetHeight);
-  // }, [window.screen.width]);
-
   const hamburgerLines = [
     {
       class: hamburgerOpen
