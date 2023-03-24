@@ -1,9 +1,10 @@
 // TODO - Open modal with button press
 
 export function Hero({ navbarHeight }: { navbarHeight: number }) {
+  console.log(navbarHeight);
   return (
     <div
-      className={`relative -z-50 bg-hero-bg bg-cover h-[calc(100vh-${navbarHeight}px)] bg-center flex justify-center sm:justify-end`}>
+      className={`h-[calc(100vh-${navbarHeight}px)] bg-hero-bg bg-cover bg-center flex justify-center sm:justify-end`}>
       <div className='font-playfair font-bold bg-code-gray-700 bg-opacity-20 w-fit h-fit rounded-sm mt-14 p-3 text-3xl text-code-gray-800 sm:mr-20 md:text-4xl md:p-5 lg:mr-36 lg:mt-24 '>
         <h2>Elevated style.</h2>
         <h2>Tailored to perfection.</h2>

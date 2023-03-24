@@ -7,7 +7,7 @@ export function App() {
 
   return (
     <div className='App h-screen font-raleway text-code-gray-700'>
-      <Navbar setNavbarHeight={setNavbarHeight} />
+      <Navbar navbarHeight={navbarHeight} setNavbarHeight={setNavbarHeight} />
       <Hero navbarHeight={navbarHeight} />
     </div>
   );
