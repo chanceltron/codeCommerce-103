@@ -54,6 +54,9 @@ module.exports = {
           800: '#49120c',
         },
       },
+      backgroundImage: {
+        'hero-bg': "url('src/assets/hero-bg2.jpg')",
+      },
     },
     plugins: [],
   },
