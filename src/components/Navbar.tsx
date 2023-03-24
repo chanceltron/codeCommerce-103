@@ -31,10 +31,12 @@ export function Navbar() {
   ];
 
   return (
-    <div className='bg-code-olive-primary px-2 py-4 flex justify-between items-center relative font-raleway'>
-      <div className='text-moon-red-100 text-2xl font-playfair font-semibold'>
+    <div className='bg-code-olive-primary px-2 py-4 flex justify-between items-center relative'>
+      <a
+        href='/'
+        className='text-moon-red-100 text-2xl font-playfair font-semibold'>
         CODE COMMERCE
-      </div>
+      </a>
       <div>
         <button
           onClick={() => setHamburgerOpen(!hamburgerOpen)}
@@ -42,7 +44,7 @@ export function Navbar() {
           {hamburgerLines.map((line, i) => (
             <div
               key={i}
-              className={`h-1 w-8 my-1 rounded-full bg-black transition ease transform duration-300 ${line.class}`}
+              className={`h-1 w-8 my-1 rounded-full bg-code-gray-700 transition ease transform duration-300 ${line.class}`}
             />
           ))}
         </button>
