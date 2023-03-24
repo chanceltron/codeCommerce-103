@@ -1,6 +1,9 @@
-import { useState } from 'react';
-
 // TODO - See if hamburger menu can be cleaned up
+// TODO - Add modal links for each of the navbar items
+// TODO - Add logic for showing user's name when signed in
+// TODO - Add badge to cart to show the number of items
+
+import { useState } from 'react';
 
 export function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
