@@ -3,33 +3,20 @@
 // TODO - Add logic for showing user's name when signed in
 // TODO - Add badge to cart to show the number of items
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
-export function Navbar({ navbarHeight, setNavbarHeight }: any) {
+export function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
-  const [width, setWidth] = useState<number>(0);
-  const navbarRef = useRef({} as HTMLInputElement);
-
-  const checkWidth = () => setWidth(window.screen.width);
-
-  useEffect(() => {
-    window.addEventListener('resize', checkWidth);
-    setNavbarHeight(navbarRef.current.offsetHeight);
-  }, [width]);
 
   const hamburgerLines = [
     {
-      class: hamburgerOpen
-        ? 'rotate-45 translate-y-3 group-hover:opacity-100'
-        : 'group-hover:opacity-100',
+      class: hamburgerOpen ? 'rotate-45 translate-y-3 ' : '',
     },
     {
-      class: hamburgerOpen ? 'opacity-0' : 'group-hover:opacity-100',
+      class: hamburgerOpen ? 'opacity-0' : '',
     },
     {
-      class: hamburgerOpen
-        ? '-rotate-45 -translate-y-3 group-hover:opacity-100'
-        : 'group-hover:opacity-100',
+      class: hamburgerOpen ? '-rotate-45 -translate-y-3 ' : '',
     },
   ];
 
@@ -40,9 +27,7 @@ export function Navbar({ navbarHeight, setNavbarHeight }: any) {
   ];
 
   return (
-    <nav
-      ref={navbarRef}
-      className='relative justify-between items-center bg-code-olive-primary w-full sm:flex'>
+    <nav className='relative justify-between items-center bg-code-olive-primary w-full sm:flex'>
       <div className='relative bg-code-olive-primary z-50 flex justify-between items-center px-2 py-3'>
         <a href='/' className='text-3xl font-playfair font-semibold'>
           CODE COMMERCE
