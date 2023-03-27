@@ -6,7 +6,7 @@ import { Category, FilterCategory, Screen } from './helpers/types';
 import { Store } from './components/Store';
 
 export function App() {
-  const [screen, setScreen] = useState<Screen>('home');
+  const [screen, setScreen] = useState('store' as Screen);
   const [category, setCategory] = useState<FilterCategory>('');
 
   return (
@@ -18,7 +18,7 @@ export function App() {
             <Hero />
           </div>
           <Collections
-            setScreen={(screen: Screen) => setScreen(screen)}
+            setScreen={() => setScreen('store')}
             setCategory={setCategory}
           />
         </>

@@ -1,12 +1,12 @@
 // TODO - Open store page with category filter
 
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { getCategories } from '../helpers/apiCalls';
-import { Category } from '../helpers/types';
+import { Category, FilterCategory } from '../helpers/types';
 
 type IProps = {
-  setScreen: (screen: string) => void;
-  setCategory: (category: string) => void;
+  setScreen: () => void;
+  setCategory: (category: FilterCategory) => void;
 };
 
 export function Collections({ setScreen, setCategory }: IProps) {
@@ -36,7 +36,7 @@ export function Collections({ setScreen, setCategory }: IProps) {
             <button
               onClick={() => {
                 setCategory(name.toLowerCase());
-                setScreen('store');
+                setScreen();
               }}
               className='absolute px-4 py-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl text-white bg-code-gray-800 transition-all opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'>
               Shop Now
