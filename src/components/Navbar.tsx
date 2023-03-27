@@ -27,7 +27,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className='relative justify-between items-center bg-code-olive-primary w-full sm:flex'>
+    <nav className='fixed z-50 justify-between items-center bg-code-olive-primary w-full sm:flex'>
       <div className='relative bg-code-olive-primary z-50 flex justify-between items-center px-2 py-3'>
         <a href='/' className='text-3xl font-playfair font-semibold'>
           CODE COMMERCE

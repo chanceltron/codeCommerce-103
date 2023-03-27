@@ -35,10 +35,10 @@ export const getCategories = () => {
     );
 };
 
-export const getProducts = (categoryId: string) => {
+export const getProducts = () => {
   const prodUrl = new URL(url + 'products');
   const params = {
-    category_id: categoryId,
+    // category_slug: category ? category : '',
     include: 'assets',
     limit: '25',
   };
@@ -46,20 +46,19 @@ export const getProducts = (categoryId: string) => {
     prodUrl.searchParams.append(key, value)
   );
 
-  fetch(prodUrl, {
+  return fetch(prodUrl, {
     method: 'GET',
     headers: headers,
   })
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then((data) => {
-      data.data.map((product: any) => {
-        return {
-          id: product.id,
-          name: product.name,
-          image: product.assets[0].url,
-          assets: product.assets,
-          price: product.price.formatted_with_symbol,
-        };
-      });
+      return data.data.map((product: any) => ({
+        id: product.id,
+        name: product.name,
+        category: product.categories[0].slug,
+        image: product.assets[0].url,
+        assets: product.assets,
+        price: product.price.formatted_with_symbol,
+      }));
     });
 };

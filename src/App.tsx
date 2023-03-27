@@ -1,18 +1,33 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Collections } from './components/Collections';
-import { createContext, useContext, useState } from 'react';
-
-type Screen = 'home' | 'store' | 'login' | 'cart';
+import { useState } from 'react';
+import { Category, FilterCategory, Screen } from './helpers/types';
+import { Store } from './components/Store';
 
 export function App() {
+  const [screen, setScreen] = useState<Screen>('home');
+  const [category, setCategory] = useState<FilterCategory>('');
+
   return (
-    <div className='App font-raleway bg-code-olive-primary text-code-gray-700 m-0 p-0'>
-      <div className='flex flex-col h-screen'>
-        <Navbar />
-        <Hero />
-      </div>
-      <Collections />
+    <div className='App font-raleway bg-code-olive-primary text-code-gray-700'>
+      <Navbar />
+      {screen === 'home' && (
+        <>
+          <div className='flex flex-col h-screen'>
+            <Hero />
+          </div>
+          <Collections
+            setScreen={(screen: Screen) => setScreen(screen)}
+            setCategory={setCategory}
+          />
+        </>
+      )}
+      {screen === 'store' && (
+        <>
+          <Store category={category} setCategory={setCategory} />
+        </>
+      )}
     </div>
   );
 }

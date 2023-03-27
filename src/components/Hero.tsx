@@ -3,7 +3,7 @@
 export function Hero() {
   return (
     <div className='bg-hero-bg bg-cover bg-center flex justify-center flex-grow sm:justify-end'>
-      <div className='h-fit font-playfair font-bold bg-code-gray-700 bg-opacity-20 mt-12 p-3 text-3xl text-code-gray-800 sm:mr-20 md:text-4xl md:p-5 lg:mr-36 lg:mt-24 '>
+      <div className='h-fit font-playfair font-bold bg-code-gray-700 bg-opacity-20 mt-24 p-3 text-3xl text-code-gray-800 sm:mr-20 md:text-4xl md:p-5 lg:mr-36 lg:mt-24 '>
         <h2>Elevated style.</h2>
         <h2>Tailored to perfection.</h2>
         <button
