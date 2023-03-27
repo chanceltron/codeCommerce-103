@@ -1,3 +1,5 @@
+// TODO - Open store page with category filter
+
 import { useEffect, useState } from 'react';
 import { getCategories } from '../helpers/apiCalls';
 import { Category } from '../helpers/types';
@@ -12,7 +14,7 @@ export function Collections() {
 
   return (
     <section id='collections'>
-      <h2 className='text-4xl font-semibold text-center mt-12 mb-4 md:text-left md:ml-24'>
+      <h2 className='text-4xl font-semibold font-playfair text-center my-12 md:text-left md:ml-24'>
         Explore Collections
       </h2>
       <div className='flex flex-wrap justify-center'>

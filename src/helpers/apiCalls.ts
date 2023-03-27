@@ -34,3 +34,32 @@ export const getCategories = () => {
       }, [])
     );
 };
+
+export const getProducts = (categoryId: string) => {
+  const prodUrl = new URL(url + 'products');
+  const params = {
+    category_id: categoryId,
+    include: 'assets',
+    limit: '25',
+  };
+  Object.entries(params).map(([key, value]) =>
+    prodUrl.searchParams.append(key, value)
+  );
+
+  fetch(prodUrl, {
+    method: 'GET',
+    headers: headers,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.map((product: any) => {
+        return {
+          id: product.id,
+          name: product.name,
+          image: product.assets[0].url,
+          assets: product.assets,
+          price: product.price.formatted_with_symbol,
+        };
+      });
+    });
+};

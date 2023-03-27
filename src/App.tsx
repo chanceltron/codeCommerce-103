@@ -1,6 +1,9 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Collections } from './components/Collections';
+import { createContext, useContext, useState } from 'react';
+
+type Screen = 'home' | 'store' | 'login' | 'cart';
 
 export function App() {
   return (
