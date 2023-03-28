@@ -5,22 +5,17 @@
 
 import { useState } from 'react';
 
-export function Navbar() {
+export function Navbar({ setScreen }: { setScreen: (a: Screen) => void }) {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
 
   const hamburgerLines = [
-    {
-      class: hamburgerOpen ? 'rotate-45 translate-y-3 ' : '',
-    },
-    {
-      class: hamburgerOpen ? 'opacity-0' : '',
-    },
-    {
-      class: hamburgerOpen ? '-rotate-45 -translate-y-3 ' : '',
-    },
+    { class: hamburgerOpen && 'rotate-45 translate-y-3 ' },
+    { class: hamburgerOpen && 'opacity-0' },
+    { class: hamburgerOpen && '-rotate-45 -translate-y-3' },
   ];
 
   const menuList = [
+    { name: 'store', label: 'store' },
     { name: 'signup', label: 'sign up' },
     { name: 'signin', label: 'sign in' },
     { name: 'cart', label: 'cart' },
@@ -29,7 +24,9 @@ export function Navbar() {
   return (
     <nav className='fixed z-50 justify-between items-center bg-code-olive-primary w-full sm:flex'>
       <div className='relative bg-code-olive-primary z-50 flex justify-between items-center px-2 py-3'>
-        <a href='/' className='text-3xl font-playfair font-semibold'>
+        <a
+          onClick={() => setScreen('home')}
+          className='text-3xl font-playfair font-semibold'>
           CODE COMMERCE
         </a>
         <button
@@ -50,7 +47,7 @@ export function Navbar() {
         {menuList.map((li) => (
           <a
             key={li.name}
-            onClick={() => alert('link clicked!')}
+            onClick={() => setScreen(li.name as Screen)}
             className='cursor-pointer'>
             <li className='p-3 w-full text-right border-t border-t-code-olive-primary transition-all hover:bg-code-olive-primary sm:border-0 sm:w-fit sm:hover:bg-transparent sm:hover:text-code-olive-400'>
               {li.label}
