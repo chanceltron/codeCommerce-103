@@ -1,32 +1,44 @@
-import { Navbar } from './components/Navbar';
+import { useState } from 'react';
 import { Hero } from './components/Hero';
 import { Collections } from './components/Collections';
-import { useState } from 'react';
-import { Category, CategoryName, Screen } from './helpers/types';
 import { Store } from './components/Store';
+import { CategoryName } from './helpers/types';
+import { Nav } from './components/Nav';
+import { useCurrentPage } from './hooks/hooks';
+import { Drawer } from './components/Drawer';
+import { Checkout } from './components/Checkout';
+import { CheckoutProvider } from './context/CheckoutContext';
 
 export function App() {
-  const [screen, setScreen] = useState('store' as Screen);
   const [category, setCategory] = useState<CategoryName>('');
+  const { currentPage } = useCurrentPage();
+  const [cartDrawerIsOpen, setCartDrawerIsOpen] = useState<boolean>(false);
 
   return (
-    <div className='App font-raleway bg-code-olive-primary text-code-gray-700'>
-      <Navbar setScreen={setScreen} />
-      {screen === 'home' && (
-        <>
-          <div className='flex flex-col h-screen'>
-            <Hero />
-          </div>
-          <Collections
-            setScreen={() => setScreen('store')}
-            setCategory={setCategory}
-          />
-        </>
-      )}
-      {screen === 'store' && (
-        <>
-          <Store category={category} setCategory={setCategory} />
-        </>
+    <div className='App font-fira bg-[#EBEAEF] text-code-gray-700'>
+      <div className='relative z-50'>
+        <Nav setCartDrawerIsOpen={setCartDrawerIsOpen} />
+      </div>
+      <div className='pb-24'>
+        {currentPage === 'home' && (
+          <>
+            <div className='flex flex-col'>
+              <Hero />
+            </div>
+            <Collections setCategory={setCategory} />
+          </>
+        )}
+        {currentPage === 'store' && <Store category={category} setCategory={setCategory} />}
+      </div>
+      {cartDrawerIsOpen && (
+        <Drawer
+          drawerIsOpen={cartDrawerIsOpen}
+          setDrawerIsOpen={setCartDrawerIsOpen}
+          title={'Shopping Cart'}>
+          <CheckoutProvider>
+            <Checkout setDrawerIsOpen={setCartDrawerIsOpen} />
+          </CheckoutProvider>
+        </Drawer>
       )}
     </div>
   );

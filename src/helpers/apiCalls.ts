@@ -41,9 +41,7 @@ export const getProducts = () => {
     include: 'assets',
     limit: '25',
   };
-  Object.entries(params).map(([key, value]) =>
-    prodUrl.searchParams.append(key, value)
-  );
+  Object.entries(params).map(([key, value]) => prodUrl.searchParams.append(key, value));
 
   return fetch(prodUrl, {
     method: 'GET',
@@ -54,6 +52,7 @@ export const getProducts = () => {
       data.data.map((product: any) => ({
         id: product.id,
         name: product.name,
+        description: product.description.replace(/<p>/gi, '').replace(/<\/p>/gi, ''),
         category: product.categories[0].slug,
         image: product.assets[0].url,
         assets: product.assets,

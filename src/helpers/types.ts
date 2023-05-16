@@ -7,21 +7,25 @@ export type Category = {
 export type Product = {
   id: string;
   name: string;
+  description: string;
   category: string;
   image: string;
-  assets: string[];
-  price: string;
   quantity: number;
+  assets: [
+    {
+      id: string;
+      filename: string;
+      url: string;
+    }
+  ];
+  price: string;
 };
 
-export type Screen = 'home' | 'store' | 'login' | 'signup' | 'cart';
-export type CategoryName =
-  | ''
-  | 'suits'
-  | 'pants'
-  | 'shirts'
-  | 'ties'
-  | 'blazers';
+export type ScreenName = 'home' | 'store' | 'cart';
+
+export type ModalName = 'login' | 'signup';
+
+export type CategoryName = '' | 'suits' | 'pants' | 'shirts' | 'ties' | 'blazers';
 
 export type Summary = {
   subtotal: number;
@@ -31,10 +35,10 @@ export type Summary = {
 };
 
 export enum FormSteps {
-  cart = 1,
-  shipping,
-  payment,
-  summary,
+  CART,
+  SHIPPING,
+  PAYMENT,
+  SUMMARY,
 }
 
 export type ShippingInfo = {
@@ -42,11 +46,12 @@ export type ShippingInfo = {
   fullName: string;
   address: string;
   postalCode: string;
-  country: string;
-  state: string;
-  city: string;
+  country: { label: string; value: string };
+  state: { label: string; value: string };
+  city: { label: string; value: string };
   cellPhone: string;
   telephone?: string;
+  selectedShippingOption: string;
 };
 
 export type PaymentInfo = {
@@ -58,3 +63,14 @@ export type PaymentInfo = {
   cvv: number;
   total: number;
 };
+
+export type User = {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  postalCode?: string;
+};
+
+export type SignUpSignInSwitch = 'signup' | 'login';

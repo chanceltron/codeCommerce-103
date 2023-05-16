@@ -9,7 +9,7 @@ import {
   requiredFieldValidation,
 } from '../utils/validations';
 
-export default class Payment extends Component {
+export class Payment extends Component {
   state = {
     cardHolderName: '',
     cardNumber: '',

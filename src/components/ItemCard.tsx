@@ -46,11 +46,9 @@ export function ItemCard({
             onChange={({ target: { value } }) => {
               changeQuantity(id, +value);
             }}>
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-            <option value='5'>5</option>
+            {[...Array(5).keys()].map((i) => (
+              <option value={i + 1}>i</option>
+            ))}
           </select>
         </div>
         <p className='text-xl font-normal'>{+price * quantity}</p>
