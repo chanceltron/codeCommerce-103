@@ -1,4 +1,9 @@
-export const Modal = ({ children, setModalIsOpen }: any) => {
+type IModalProps = {
+  children: React.ReactNode;
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const Modal = ({ children, setModalIsOpen }: IModalProps) => {
   return (
     <div className='fixed inset-0 z-10 overflow-y-scroll'>
       <div

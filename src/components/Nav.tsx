@@ -4,18 +4,24 @@ import { Login } from './Login';
 import { Modal } from './Modal';
 import { SpeedDial } from './SpeedDial';
 import { ModalName } from '../helpers/types';
+import { useNavigate } from 'react-router-dom';
+import { Drawer } from './Drawer';
+import { CheckoutProvider } from '../context/CheckoutContext';
+import { Checkout } from './Checkout';
 
-export function Nav({ setCartDrawerIsOpen }: any) {
+export function Nav() {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [currentModal, setCurrentModal] = useState<ModalName>('login');
+  const [cartDrawerIsOpen, setCartDrawerIsOpen] = useState<boolean>(false);
   const { loggedInUser, logout } = useUsers();
   const { currentPage, setCurrentPage } = useCurrentPage();
   const { totalQuantity } = useCart();
+  const navigate = useNavigate();
 
   const navItems = [
-    { name: 'home', label: 'Home', icon: 'fa-solid fa-house' },
-    { name: 'store', label: 'Store', icon: 'fa-solid fa-shirt' },
-    { name: 'cart', label: 'Cart', icon: 'fa-solid fa-shopping-cart' },
+    { name: 'home', label: 'Home', nav: '', icon: 'fa-solid fa-house' },
+    { name: 'store', label: 'Store', nav: 'store', icon: 'fa-solid fa-shirt' },
+    { name: 'cart', label: 'Cart', nav: 'cart', icon: 'fa-solid fa-shopping-cart' },
   ];
 
   const menuList = [
@@ -75,14 +81,14 @@ export function Nav({ setCartDrawerIsOpen }: any) {
     <>
       <nav id='navbar' className='fixed bottom-0 w-full'>
         <div className='flex items-center justify-between pb-2 text-xl bg-code-gray-700'>
-          {navItems.map(({ name, label, icon }) => (
+          {navItems.map(({ name, label, nav, icon }) => (
             <button
               key={name}
               onClick={() => {
                 if (name === 'cart') {
                   return setCartDrawerIsOpen(true);
                 }
-                setCurrentPage(name);
+                navigate(nav);
               }}
               className='w-full'>
               <div className={`group flex flex-col py-4 justify-center items-center`}>
@@ -112,6 +118,14 @@ export function Nav({ setCartDrawerIsOpen }: any) {
           />
         </Modal>
       )}
+      <Drawer
+        drawerIsOpen={cartDrawerIsOpen}
+        setDrawerIsOpen={setCartDrawerIsOpen}
+        title={'Shopping Cart'}>
+        <CheckoutProvider>
+          <Checkout setDrawerIsOpen={setCartDrawerIsOpen} />
+        </CheckoutProvider>
+      </Drawer>
     </>
   );
 }

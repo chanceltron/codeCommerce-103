@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { CategoryName, Product } from '../helpers/types';
 import { getProducts } from '../helpers/apiCalls';
 import { ProductCard } from './ProductCard';
+import { useSearchParams } from 'react-router-dom';
 
 type IProps = {
   category: CategoryName;
@@ -10,6 +11,7 @@ type IProps = {
 
 export function Store({ category, setCategory }: IProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const categoryButtons = [
     { name: 'suits', icon: 'src/assets/icons/suit.png' },
@@ -22,11 +24,34 @@ export function Store({ category, setCategory }: IProps) {
   useEffect(() => {
     getProducts().then((res) => {
       if (category) {
-        return setProducts(res.filter((product: Product) => product.category === category));
+        setProducts(res.filter((product: Product) => product.category === category));
+        return;
       }
-      return setProducts(res);
+      // setSearchParams({});
+      setProducts(res);
+      return;
     });
   }, [category]);
+
+  useLayoutEffect(() => {
+    if (searchParams.has('category')) {
+      const newUrlCategory = searchParams.get('category') as CategoryName;
+      setCategory(newUrlCategory);
+      return;
+    } else {
+      setCategory('');
+    }
+  }, []);
+
+  const handleCategoryChange = (newCategory: string) => {
+    if (newCategory === '' || newCategory === category) {
+      setCategory('');
+      setSearchParams({});
+      return;
+    }
+    setCategory(newCategory as CategoryName);
+    setSearchParams({ category: newCategory });
+  };
 
   return (
     <div className=''>
@@ -34,7 +59,7 @@ export function Store({ category, setCategory }: IProps) {
         {categoryButtons.map(({ name, icon }) => (
           <div key={name} className='flex flex-col justify-center items-center'>
             <button
-              onClick={() => setCategory(category === name ? '' : (name as CategoryName))}
+              onClick={() => handleCategoryChange(category === name ? '' : (name as CategoryName))}
               className={`text-xl transition-all flex flex-col justify-center items-center bg-gray-100 p-2 rounded-lg hover:bg-gray-200 ${
                 category === name && 'bg-gray-200'
               }`}>
@@ -47,11 +72,13 @@ export function Store({ category, setCategory }: IProps) {
         ))}
       </div>
       <div className=''>
-        <p className='mt-2 px-2 uppercase text-xl font-semibold'>
-          Viewing {category ? category : 'all products'}
-        </p>
+        <div className='mt-2 px-2 '>
+          <p className='uppercase text-xl font-semibold'>
+            Viewing {category ? category : 'all products'}
+          </p>
+          <p>Showing {products.length} Results</p>
+        </div>
         <div className='grid grid-flow-row grid-cols-2 gap-2 px-2'>
-          {/* <div className=''>Showing {products.length} Results</div> */}
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

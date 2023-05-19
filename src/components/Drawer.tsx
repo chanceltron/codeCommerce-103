@@ -17,21 +17,27 @@ export const Drawer = ({ drawerIsOpen, setDrawerIsOpen, title, children }: any) 
 
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-full w-full shadow-lg transform transition-transform duration-300 ${
-        drawerIsOpen ? 'translate-x-0' : 'translate-x-full'
+      className={`fixed top-0 right-0 z-50 h-full w-full shadow-lg ${
+        drawerIsOpen ? '' : 'pointer-events-none'
       }`}>
       <div
-        className='absolute top-0 left-0 w-full h-full bg-gray-900 opacity-50'
-        onClick={() => setDrawerIsOpen(false)}></div>
-      <div className='relative z-10 h-full overflow-y-auto bg-[#ebeaef]'>
-        <div className='fixed top-0 left-0 right-0 flex justify-between items-center font-bold text-xl px-7 py-4 z-50'>
+        className={`fixed top-0 right-0 w-full h-full bg-gray-900 opacity-0 transform transition-all duration-300 ${
+          drawerIsOpen ? 'opacity-50' : ''
+        }`}
+        onClick={() => setDrawerIsOpen(false)}
+      />
+      <div
+        className={`fixed top-0 right-0 max-w-md z-10 h-full overflow-y-auto bg-[#ebeaef] transform transition-transform duration-300 ${
+          drawerIsOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+        <div className='sticky w-full flex justify-between items-center font-bold text-xl px-5 py-4 z-50'>
           <button onClick={() => setDrawerIsOpen(false)}>
             <i className='fa-solid fa-chevron-left'></i>
           </button>
           <h1>{title}</h1>
           <CartButton />
         </div>
-        <div className='pt-16 pb-20 h-full'>{children}</div>
+        <div className=''>{children}</div>
       </div>
     </div>
   );

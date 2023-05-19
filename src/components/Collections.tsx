@@ -1,7 +1,7 @@
-import { Dispatch, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCategories } from '../helpers/apiCalls';
-import { Category, CategoryName, ScreenName } from '../helpers/types';
-import { useCurrentPage } from '../hooks/hooks';
+import { Category, CategoryName } from '../helpers/types';
+import { useNavigate } from 'react-router-dom';
 
 type IProps = {
   setCategory: (category: CategoryName) => void;
@@ -9,7 +9,7 @@ type IProps = {
 
 export function Collections({ setCategory }: IProps) {
   const [categories, setCategories] = useState<Category[]>([]);
-  const { setCurrentPage } = useCurrentPage();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCategories().then((res) => setCategories(res));
@@ -35,7 +35,7 @@ export function Collections({ setCategory }: IProps) {
             <button
               onClick={() => {
                 setCategory(name.toLowerCase() as CategoryName);
-                setCurrentPage('store');
+                navigate('/store');
               }}
               className='absolute px-4 py-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl text-white bg-code-gray-800 transition-all opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'>
               Shop Now
