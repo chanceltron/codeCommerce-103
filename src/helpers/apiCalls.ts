@@ -15,7 +15,7 @@ export const getCategories = () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      return data.data.map((category: any) => {
+      return data.data.map((category: Category) => {
         return {
           id: category.id,
           name: category.name,

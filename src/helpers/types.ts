@@ -2,6 +2,12 @@ export type Category = {
   id: string;
   name: string;
   image: string;
+  assets: [
+    {
+      id: string;
+      url: string;
+    }
+  ]
 };
 
 export type Product = {
@@ -42,16 +48,16 @@ export enum FormSteps {
 }
 
 export type ShippingInfo = {
+  address: string;
   addressTitle: string;
   fullName: string;
-  address: string;
   postalCode: string;
-  country: { label: string; value: string };
-  state: { label: string; value: string };
-  city: { label: string; value: string };
+  country: { value: string; label: string };
+  state: { value: string; label: string };
+  city: { value: string; label: string };
   cellPhone: string;
   telephone?: string;
-  selectedShippingOption: string;
+  selectedShipping: string;
 };
 
 export type PaymentInfo = {

@@ -1,12 +1,13 @@
-import { useState, useLayoutEffect, useContext, useEffect } from 'react';
-import { AppContext } from '../context/AppContext';
-import { Product, ShippingInfo, User } from '../helpers/types';
-import { CheckoutContext } from '../context/CheckoutContext';
+import { useState, useLayoutEffect, useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext";
+import { Product, ShippingInfo, User } from "../helpers/types";
+import { CheckoutContext } from "../context/CheckoutContext";
+import { FieldValues } from "react-hook-form";
 
 export const useAdjustedScreenHeight = () => {
   const [adjustedHeight, setAdjustedHeight] = useState<number>(0);
   const [navHeight, setNavHeight] = useState<number>(0);
-  const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById("navbar");
 
   const updateAdjustedHeight = () => {
     setNavHeight(navbar ? navbar.offsetHeight : 0);
@@ -14,10 +15,10 @@ export const useAdjustedScreenHeight = () => {
 
   useLayoutEffect(() => {
     updateAdjustedHeight();
-    window.addEventListener('resize', updateAdjustedHeight);
+    window.addEventListener("resize", updateAdjustedHeight);
 
     return () => {
-      window.removeEventListener('resize', updateAdjustedHeight);
+      window.removeEventListener("resize", updateAdjustedHeight);
     };
   }, []);
 
@@ -32,7 +33,7 @@ export const useCurrentPage = () => {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error('useCurrentPage must be used within a AppProvider');
+    throw new Error("useCurrentPage must be used within a AppProvider");
   }
 
   const { currentPage, setCurrentPage } = context;
@@ -44,7 +45,7 @@ export const useUsers = () => {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error('useUser must be used within a AppProvider');
+    throw new Error("useUser must be used within a AppProvider");
   }
 
   const { users, setUsers, loggedInUser, setLoggedInUser } = context;
@@ -54,7 +55,9 @@ export const useUsers = () => {
   };
 
   const login = (email: string, password: string) => {
-    const user = users.find((user) => user.email === email && user.password === password);
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
     if (user) {
       setLoggedInUser(user);
     }
@@ -73,7 +76,7 @@ export const useCart = () => {
   const appContext = useContext(AppContext);
 
   if (!appContext) {
-    throw new Error('useCart must be used within a AppProvider');
+    throw new Error("useCart must be used within a AppProvider");
   }
 
   const { cart, setCart } = appContext;
@@ -124,7 +127,9 @@ export const useCheckout = () => {
   const checkoutContext = useContext(CheckoutContext);
 
   if (!appContext && !checkoutContext) {
-    throw new Error('useCheckout must be used within a CheckoutProvider and AppProvider');
+    throw new Error(
+      "useCheckout must be used within a CheckoutProvider and AppProvider"
+    );
   }
 
   const { discount, setDiscount, shipping, setShipping } = checkoutContext;
@@ -133,24 +138,26 @@ export const useCheckout = () => {
 
   const discountCodes = [
     {
-      code: '10OFF',
+      code: "10OFF",
       discount: 10,
     },
     {
-      code: '20OFF',
+      code: "20OFF",
       discount: 20,
     },
   ];
 
   const applyDiscount = (discountCode: string) => {
-    const code = discountCodes.find((discount) => discount.code === discountCode);
+    const code = discountCodes.find(
+      (discount) => discount.code === discountCode
+    );
     if (code) {
       setDiscount(code.discount);
     }
   };
 
   const subtotal = cart.reduce(
-    (acc, item) => acc + +item.price.replace(/[$]/g, '') * item.quantity,
+    (acc, item) => acc + +item.price.replace(/[$]/g, "") * item.quantity,
     0
   );
 
@@ -176,7 +183,7 @@ export const useFormStep = () => {
   const context = useContext(CheckoutContext);
 
   if (!context) {
-    throw new Error('useFormStep must be used within a AppProvider');
+    throw new Error("useFormStep must be used within a AppProvider");
   }
 
   const { formStep, setFormStep } = context;
@@ -191,13 +198,37 @@ export const useShippingForm = () => {
   const context = useContext(CheckoutContext);
 
   if (!context) {
-    throw new Error('useShippingForm must be used within a AppProvider');
+    throw new Error("useShippingForm must be used within a AppProvider");
   }
 
   const { shippingInfo, setShippingInfo } = context;
 
-  const updateShippingInfo = (shippingForm: ShippingInfo) => {
-    setShippingInfo(shippingForm);
+  const updateShippingInfo = (shippingForm: FieldValues) => {
+    const {
+      addressTitle,
+      address,
+      fullName,
+      cellPhone,
+      city,
+      state,
+      postalCode,
+      country,
+      telephone,
+      selectedShipping,
+    } = shippingForm;
+    console.log(shippingForm);
+    setShippingInfo({
+      addressTitle,
+      address,
+      fullName,
+      cellPhone,
+      city,
+      state,
+      postalCode,
+      country,
+      telephone,
+      selectedShipping,
+    });
   };
 
   return { shippingInfo, updateShippingInfo };
