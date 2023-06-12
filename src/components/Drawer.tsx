@@ -4,7 +4,7 @@ import { CartButton } from "./CartButton";
 type Props = {
   drawerIsOpen: boolean;
   setDrawerIsOpen: (isOpen: boolean) => void;
-  title: string;
+  title?: string;
   children: React.ReactNode;
 };
 
@@ -40,7 +40,7 @@ export const Drawer = ({
         onClick={() => setDrawerIsOpen(false)}
       />
       <div
-        className={`fixed top-0 right-0 max-w-md z-10 h-full overflow-y-auto bg-[#ebeaef] transform transition-transform duration-300 ${
+        className={`relative z-10 w-full h-full overflow-y-auto bg-[#ebeaef] transform transition-transform duration-300 ${
           drawerIsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

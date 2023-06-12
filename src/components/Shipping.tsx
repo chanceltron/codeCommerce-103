@@ -134,11 +134,14 @@ export function Shipping() {
   ];
 
   return (
-    <div className="overflow-y-scroll pb-4">
+    <div className="overflow-y-scroll pb-4 relative">
       <h2 className="text-2xl font-medium py-2 border-b-2">
         SHIPPING INFORMATION
       </h2>
-      <form onSubmit={handleSubmit((data) => updateShippingInfo(data))}>
+      <form
+        className=""
+        onSubmit={handleSubmit((data) => updateShippingInfo(data))}
+      >
         <div className="grid grid-cols-3 gap-2 flex-wrap border-b-2 py-2">
           {shippingInputs.map((input) => {
             if (input.type === "select") {
@@ -208,9 +211,9 @@ export function Shipping() {
             </p> */}
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full px-4 pb-4 flex justify-center items-center mt-8 text-white text-lg font-medium">
+        <div className="fixed bottom-0 left-0 w-full px-4 pb-4 flex justify-center items-center mt-8 text-white text-lg font-medium">
           <button className="flex px-16 py-3 bg-black rounded-full transition-all hover:bg-neutral-800 disabled:opacity-40 disabled:pointer-events-none">
-            Proceed to {nextSteps[formStep]}
+            Proceed to Payment
           </button>
         </div>
       </form>

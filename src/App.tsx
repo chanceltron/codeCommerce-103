@@ -9,7 +9,7 @@ export function App() {
   const [category, setCategory] = useState<CategoryName>("");
 
   return (
-    <div className="App font-fira bg-[#EBEAEF] text-code-gray-700 max-w-md mx-auto">
+    <div className="relative font-fira bg-[#EBEAEF] text-code-gray-700 mx-auto">
       <div className="relative z-50">
         <Nav />
       </div>

@@ -92,7 +92,7 @@ export function Nav() {
 
   return (
     <>
-      <nav id="navbar" className="fixed max-w-md bottom-0 w-full">
+      <nav id="navbar" className="fixed bottom-0 w-full">
         <div className="flex items-center justify-between pb-2 text-xl bg-code-gray-700">
           {navItems.map(({ name, label, nav, icon }) => (
             <button
